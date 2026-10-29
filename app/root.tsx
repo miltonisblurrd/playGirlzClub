@@ -13,7 +13,6 @@ import {
 } from "react-router";
 
 import { CartAnalyticsTracker, PageViewedTracker } from "~/components/AnalyticsTrackers";
-import { AnnouncementBar } from "~/components/AnnouncementBar";
 import { CartDrawer } from "~/components/CartDrawer";
 import { Footer } from "~/components/Footer";
 import { Header } from "~/components/Header";
@@ -39,6 +38,12 @@ import appStylesHref from "./app.css?url";
 
 export const links: Route.LinksFunction = () => [
   { rel: "stylesheet", href: appStylesHref },
+  { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap",
+  },
   { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
 ];
 
@@ -151,10 +156,9 @@ export default function App({ loaderData }: Route.ComponentProps) {
     <CartProvider initialData={loaderData.cartData}>
       <PageViewedTracker />
       <CartAnalyticsTracker />
-      <AnnouncementBar />
-      <Header shopInfo={loaderData.shopInfo} />
+      <Header />
       <Outlet />
-      <Footer shopInfo={loaderData.shopInfo} />
+      <Footer />
       <CartDrawer />
       <SearchDrawer />
     </CartProvider>

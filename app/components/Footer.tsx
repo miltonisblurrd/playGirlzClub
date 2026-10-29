@@ -1,63 +1,32 @@
-import { Link } from "react-router";
+const LINKS = [
+  { label: "Shop", href: "/#drop" },
+  { label: "About", href: "/#about" },
+  { label: "Privacy Policy", href: "/#privacy" },
+  { label: "Shipping and Refunds", href: "/#shipping" },
+];
 
-import type { StorefrontShop } from "~/lib/storefront-shop";
-
-import { PaymentMethodIcon } from "./PaymentMethodIcon";
-
-const linkClass =
-  "min-h-touch-target text-on-surface-secondary hover:text-on-surface focus-visible:outline-accent inline-flex items-center font-normal no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 motion-safe:transition-colors";
-
-export function Footer({ shopInfo }: { shopInfo: StorefrontShop }) {
+export function Footer() {
   return (
-    <footer className="max-w-page px-margin mx-auto w-full">
-      <div
-        className={`border-border grid grid-cols-1 gap-8 border-t py-12 text-sm md:grid-cols-2 ${shopInfo.paymentMethods.length > 0 ? "lg:grid-cols-3" : ""}`}
+    <footer className="relative min-h-[70vh] overflow-hidden bg-[#f7c5dc] text-white">
+      <img
+        src="/brand/hero.jpg"
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover object-[78%_center]"
+      />
+      <nav
+        aria-label="Footer"
+        className="relative flex min-h-[70vh] flex-col justify-end gap-2 px-6 py-10 md:px-10 md:py-12"
       >
-        <div className="min-w-0 wrap-anywhere">
-          <h2 className="type-body-sm text-on-surface mb-4 font-medium">{shopInfo.name}</h2>
-        </div>
-        <nav aria-labelledby="footer-customer-care-heading">
-          <h2
-            className="type-body-sm text-on-surface mb-4 font-medium"
-            id="footer-customer-care-heading"
+        {LINKS.map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            className="text-4xl leading-none font-black text-white no-underline md:text-5xl"
           >
-            Customer care
-          </h2>
-          <ul role="list" className="flex flex-col gap-2">
-            <li>
-              <Link to="/search" className={linkClass}>
-                Search
-              </Link>
-            </li>
-            <li>
-              <Link to="/account" className={linkClass}>
-                Account
-              </Link>
-            </li>
-          </ul>
-        </nav>
-        {shopInfo.paymentMethods.length > 0 ? (
-          <div>
-            <h2
-              id="footer-payment-methods-heading"
-              className="type-body-sm text-on-surface mb-4 font-medium"
-            >
-              Payment methods
-            </h2>
-            <ul
-              role="list"
-              aria-labelledby="footer-payment-methods-heading"
-              className="flex flex-wrap items-center gap-2"
-            >
-              {shopInfo.paymentMethods.map((method) => (
-                <li key={method} className="max-w-full">
-                  <PaymentMethodIcon method={method} />
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-      </div>
+            {link.label}
+          </a>
+        ))}
+      </nav>
     </footer>
   );
 }

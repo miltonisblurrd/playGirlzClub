@@ -85,3 +85,142 @@ body:has(.drawer-right[open]),
 body:has(.drawer-left[open]) {
   overflow: hidden;
 }
+
+@keyframes pgc-spring {
+  0% {
+    opacity: 0;
+    scale: 0.55;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.pgc-polaroid {
+  animation: pgc-spring 0.85s cubic-bezier(0.22, 1.4, 0.36, 1) both;
+  touch-action: none;
+}
+
+@keyframes pgc-glow {
+  0%,
+  78%,
+  100% {
+    box-shadow: 0 0 2px 0 rgb(243 170 203 / 0.55);
+  }
+  88% {
+    box-shadow: 0 0 3px 0 rgb(216 180 254 / 0.7);
+  }
+}
+
+@keyframes pgc-stroke {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes pgc-bag-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.6);
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.35);
+  }
+}
+
+@keyframes pgc-heart-fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+    transform: translate3d(var(--pgc-drift), 110vh, 0) rotate(28deg);
+  }
+}
+
+.pgc-heart {
+  animation-name: pgc-heart-fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.pgc-bag-item {
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  width: 10px;
+  height: 8px;
+  margin-left: -5px;
+  border-radius: 2px;
+  background: #f3aacb;
+  animation: pgc-bag-drop 0.7s ease-in forwards;
+}
+
+.pgc-scroll-cta {
+  border: 2px solid transparent;
+  background-image:
+    linear-gradient(#fff, #fff),
+    linear-gradient(100deg, #f3aacb, #fff, #c084fc, #fff, #f3aacb);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  background-size: auto, 200% 100%;
+  animation:
+    pgc-glow 9s linear infinite,
+    pgc-stroke 2.8s linear infinite;
+}
+
+@keyframes pgc-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.pgc-marquee {
+  animation: pgc-marquee 22s linear infinite;
+}
+
+.pgc-girlz {
+  font-family: "Bagel Fat One", "Segoe UI", cursive;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+@keyframes pgc-bill {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(var(--pgc-spin)) scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--pgc-dx), var(--pgc-dy), 0) rotate(calc(var(--pgc-spin) + 240deg))
+      scale(1);
+  }
+}
+
+.pgc-bill {
+  animation: pgc-bill var(--pgc-dur) cubic-bezier(0.16, 0.84, 0.32, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pgc-polaroid,
+  .pgc-scroll-cta {
+    animation: none;
+    opacity: 1;
+    scale: 1;
+  }
+}
