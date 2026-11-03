@@ -184,9 +184,9 @@ export async function loader({ context }: Route.LoaderArgs) {
 
 export default function Home({ loaderData }: Route.ComponentProps) {
   return (
-    <main id="main-content" tabIndex={-1} className="flex-1 bg-[#fff7fb] text-[#1a1016]">
-      <section className="relative z-20 w-full">
-        <div className="relative mx-auto min-h-[46rem] max-w-6xl px-5 py-12 md:py-16">
+    <main id="main-content" tabIndex={-1} className="pgc-clouds flex-1 text-[#1a1016]">
+      <section className="relative z-20 w-full overflow-x-clip">
+        <div className="relative mx-auto min-h-[52rem] max-w-6xl px-5 py-12 md:min-h-[46rem] md:py-16">
           <h1 className="pointer-events-none relative z-30 max-w-xl text-[clamp(4.75rem,7vw,8rem)] leading-[0.82] font-black tracking-tight whitespace-nowrap">
             PLAY
             <br />
@@ -194,7 +194,13 @@ export default function Home({ loaderData }: Route.ComponentProps) {
             <br />
             CLUB
           </h1>
-          <HeroCollage />
+          <a
+            href="#drop"
+            className="pgc-scroll-cta pgc-shop-now pointer-events-auto relative z-30 mt-8 inline-flex h-12 items-center rounded-full px-6 text-sm font-semibold text-[#1a1016] no-underline"
+          >
+            Shop Our New Collection
+          </a>
+          <HeroCollage products={loaderData.drop} />
         </div>
         <ScrollCue />
         <div className="absolute inset-x-0 -bottom-10 z-30 w-full">
@@ -206,7 +212,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         <StoryFill />
       </section>
 
-      <section id="drop" className="mx-auto max-w-6xl px-5 py-8 md:py-16">
+      <section id="drop" className="mx-auto max-w-6xl px-5 pt-24 pb-8 md:py-16">
         <h2 className="mb-8 text-5xl leading-none font-black tracking-tight uppercase md:text-7xl">
           For the <span className="pgc-girlz text-[#c2186a]">baddies</span>
         </h2>
@@ -218,11 +224,11 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       </section>
 
       <HeartShower>
-      <section id="about" className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-28 md:grid-cols-2 md:py-40">
+      <section id="about" className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-20 md:grid-cols-2 md:py-28">
         <img
           src="/brand/xena.jpg"
           alt="Xena"
-          className="aspect-square w-full rounded-[2rem] object-cover"
+          className="aspect-square w-full rounded-[2rem] border-2 border-[#f3aacb] object-cover"
         />
         <div>
           <p className="text-sm font-semibold tracking-[0.22em] text-[#c2186a] uppercase">Founder</p>
@@ -247,11 +253,11 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         </div>
       </section>
       </HeartShower>
-      <section className="mx-auto grid max-w-6xl grid-cols-3 gap-4 px-5 pt-8 pb-40 md:pb-56" aria-label="Gallery">
-        <img src="/brand/hero.jpg" alt="" className="col-span-2 row-start-1 h-72 w-full rounded-3xl object-cover md:h-96" />
-        <img src="/brand/portrait.jpg" alt="" className="col-start-3 row-start-1 h-72 w-full rounded-3xl object-cover md:h-96" />
-        <img src="/brand/stickers/club-girl.jpg" alt="" className="col-start-1 row-start-2 h-72 w-full rounded-3xl object-cover md:h-96" />
-        <img src="/brand/wordmark.png" alt="" className="col-span-2 col-start-2 row-start-2 h-72 w-full rounded-3xl bg-[#1a1016] object-cover md:h-96" />
+      <section className="mx-auto grid max-w-6xl grid-cols-1 gap-4 px-5 pt-6 pb-16 md:grid-cols-3 md:pb-24" aria-label="Gallery">
+        <img src="/brand/hero.jpg" alt="" className="aspect-square w-full rounded-3xl border-2 border-[#f3aacb] object-cover md:col-span-2 md:row-start-1 md:aspect-auto md:h-96" />
+        <img src="/brand/portrait.jpg" alt="" className="aspect-square w-full rounded-3xl border-2 border-[#f3aacb] object-cover md:col-start-3 md:row-start-1 md:aspect-auto md:h-96" />
+        <img src="/brand/stickers/club-girl.jpg" alt="" className="aspect-square w-full rounded-3xl border-2 border-[#f3aacb] object-cover md:col-start-1 md:row-start-2 md:aspect-auto md:h-96" />
+        <img src="/brand/wordmark.png" alt="" className="aspect-square w-full rounded-3xl border-2 border-[#f3aacb] bg-[#1a1016] object-cover md:col-span-2 md:col-start-2 md:row-start-2 md:aspect-auto md:h-96" />
       </section>
     </main>
   );

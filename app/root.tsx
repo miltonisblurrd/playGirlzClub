@@ -16,6 +16,7 @@ import { CartAnalyticsTracker, PageViewedTracker } from "~/components/AnalyticsT
 import { CartDrawer } from "~/components/CartDrawer";
 import { Footer } from "~/components/Footer";
 import { Header } from "~/components/Header";
+import { MarqueeBanner } from "~/components/MarqueeBanner";
 import { SearchDrawer } from "~/components/SearchDrawer";
 import { CartProvider } from "~/lib/cart";
 import { cartHandlers } from "~/lib/cart-handlers";
@@ -158,6 +159,11 @@ export default function App({ loaderData }: Route.ComponentProps) {
       <CartAnalyticsTracker />
       <Header />
       <Outlet />
+      <MarqueeBanner
+        text="Be Apart of Play Girlz Club. Made for baddies like you"
+        className="bg-[#b7e3ff] text-[#1a1016]"
+        label="Be Apart of Play Girlz Club. Made for baddies like you"
+      />
       <Footer />
       <CartDrawer />
       <SearchDrawer />

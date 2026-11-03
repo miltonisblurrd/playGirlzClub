@@ -44,11 +44,11 @@ export function StoryFill() {
       }
 
       const arrive = progress > 0.86;
-      if (arrive !== shown.current && charm.current) {
+      if (charm.current) {
         shown.current = arrive;
-        charm.current.style.transform = arrive
-          ? "translate3d(0, 0, 0) rotate(45deg)"
-          : "translate3d(70%, 0, 0) rotate(45deg)";
+        const compact = window.matchMedia("(max-width: 767px)").matches;
+        const rest = compact ? "translate3d(42%, 0, 0) rotate(45deg)" : "translate3d(0, 0, 0) rotate(45deg)";
+        charm.current.style.transform = arrive ? rest : "translate3d(70%, 0, 0) rotate(45deg)";
       }
     };
 
@@ -92,14 +92,14 @@ export function StoryFill() {
       })}
       <span
         ref={charm}
-        className="absolute -bottom-24 left-[calc(50%+8rem)] drop-shadow-xl md:left-[calc(50%+16rem)]"
+        className="absolute -bottom-28 left-[calc(50%+1rem)] drop-shadow-xl md:-bottom-24 md:left-[calc(50%+16rem)]"
         style={{
           transform: "translate3d(70%, 0, 0) rotate(45deg)",
           transition: "transform 1.1s cubic-bezier(0.22, 1, 0.36, 1)",
         }}
         aria-hidden="true"
       >
-        <svg width="240" height="340" viewBox="0 0 240 340" fill="none">
+        <svg className="h-auto w-[200px] md:w-[240px]" viewBox="0 0 240 340" fill="none">
           <ellipse cx="120" cy="28" rx="34" ry="22" stroke="#b9b3ae" strokeWidth="8" />
           <ellipse cx="120" cy="28" rx="34" ry="22" stroke="#f4f1ee" strokeWidth="2" />
           <path

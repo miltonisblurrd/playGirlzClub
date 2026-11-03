@@ -16,7 +16,7 @@ export function ScrollCue() {
   return (
     <a
       href="#story"
-      className="pgc-scroll-cta absolute right-6 bottom-20 z-40 inline-flex items-center rounded-full bg-white py-2 pr-2 text-sm font-semibold no-underline"
+      className="pgc-scroll-cta absolute right-6 bottom-6 z-40 inline-flex items-center rounded-full bg-white py-2 pr-2 text-sm font-semibold no-underline md:bottom-20"
       style={{ paddingLeft: open > 0.04 ? 18 : 8 }}
       aria-label="Scroll down"
     >
