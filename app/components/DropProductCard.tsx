@@ -15,8 +15,8 @@ export type DropItem = {
 function Details({ item }: { item: DropItem }) {
   return (
     <div className="mt-4 flex items-baseline justify-between gap-3">
-      <h3 className="pgc-card-title text-2xl font-black sm:text-lg">{item.name}</h3>
-      <p className="shrink-0 text-xl font-semibold sm:text-base">{item.price}</p>
+      <h3 className="pgc-card-title text-3xl font-black">{item.name}</h3>
+      <p className="shrink-0 text-2xl font-semibold">{item.price}</p>
     </div>
   );
 }
@@ -37,51 +37,6 @@ function Thumb({ item }: { item: DropItem }) {
   );
 }
 
-export function ProductBuy({ item }: { item: DropItem }) {
-  const variant = item.product?.selectedOrFirstAvailableVariant;
-  if (!item.product || !variant) {
-    return (
-      <button
-        type="button"
-        className="pgc-scroll-cta pgc-shop-now mt-4 inline-flex h-12 items-center rounded-full px-6 text-base font-semibold text-[#1a1016] sm:h-10 sm:px-4 sm:text-sm"
-        disabled
-      >
-        Buy now
-      </button>
-    );
-  }
-
-  return (
-    <ProductProvider product={item.product} onSelect={() => undefined}>
-      <WiredBuy item={item} />
-    </ProductProvider>
-  );
-}
-
-function WiredBuy({ item }: { item: DropItem }) {
-  const { register, formProps, errors, pending, options } = useProductForm();
-  const variant = item.product?.selectedOrFirstAvailableVariant;
-  const soldOut = variant ? !variant.availableForSale : true;
-
-  return (
-    <form {...formProps({ afterSubmit: openCartDrawer })}>
-      <input type="hidden" {...register("merchandiseId", {})} />
-      <button
-        {...register("addToCart", {})}
-        disabled={soldOut || pending || !options}
-        className="pgc-scroll-cta pgc-shop-now mt-4 inline-flex h-12 items-center rounded-full px-6 text-base font-semibold text-[#1a1016] disabled:opacity-50 sm:h-10 sm:px-4 sm:text-sm"
-      >
-        {soldOut ? "Sold out" : "Buy now"}
-      </button>
-      {[...errors.userErrors, ...errors.networkErrors].length ? (
-        <p className="mt-3 text-sm text-red-700" role="alert">
-          {[...errors.userErrors, ...errors.networkErrors].map((error) => error.message).join(" ")}
-        </p>
-      ) : null}
-    </form>
-  );
-}
-
 export function DropProductCard({ item }: { item: DropItem }) {
   const variant = item.product?.selectedOrFirstAvailableVariant;
   if (!item.product || !variant) {
@@ -89,11 +44,11 @@ export function DropProductCard({ item }: { item: DropItem }) {
       <article className="pgc-card">
         <Thumb item={item} />
         <Details item={item} />
-        <p className="mt-1 text-base text-[#4a3040] sm:text-sm">{item.detail}</p>
-        <p className="mt-1 text-sm tracking-wide text-[#c2186a] uppercase sm:text-xs">{item.stock}</p>
+        <p className="mt-1 text-lg text-[#4a3040]">{item.detail}</p>
+        <p className="mt-1 text-base tracking-wide text-[#c2186a] uppercase">{item.stock}</p>
         <button
           type="button"
-          className="pgc-scroll-cta pgc-shop-now mt-4 inline-flex h-12 items-center rounded-full px-6 text-base font-semibold text-[#1a1016] sm:h-10 sm:px-4 sm:text-sm"
+          className="pgc-scroll-cta pgc-shop-now mt-5 inline-flex h-14 items-center rounded-full px-8 text-lg font-semibold text-[#1a1016]"
           disabled
         >
           Buy now
@@ -120,14 +75,14 @@ function WiredCard({ item }: { item: DropItem }) {
     <article className="pgc-card">
       <Thumb item={item} />
       <Details item={item} />
-      <p className="mt-1 text-base text-[#4a3040] sm:text-sm">{item.detail}</p>
+      <p className="mt-1 text-lg text-[#4a3040]">{item.detail}</p>
       <form {...formProps({ afterSubmit: openCartDrawer })} className="mt-1">
         <input type="hidden" {...register("merchandiseId", {})} />
-        <p className="text-sm tracking-wide text-[#c2186a] uppercase sm:text-xs">{left}</p>
+        <p className="text-base tracking-wide text-[#c2186a] uppercase">{left}</p>
         <button
           {...register("addToCart", {})}
           disabled={soldOut || pending || !options}
-          className="pgc-scroll-cta pgc-shop-now mt-4 inline-flex h-12 items-center rounded-full px-6 text-base font-semibold text-[#1a1016] disabled:opacity-50 sm:h-10 sm:px-4 sm:text-sm"
+          className="pgc-scroll-cta pgc-shop-now mt-5 inline-flex h-14 items-center rounded-full px-8 text-lg font-semibold text-[#1a1016] disabled:opacity-50"
         >
           {soldOut ? "Sold out" : "Buy now"}
         </button>

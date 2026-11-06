@@ -73,12 +73,6 @@ const DROP_QUERY = gql(
       holographicSticker: product(handle: "holographic-pgc-sticker") {
         ...DropProduct
       }
-      playgirlzKeychain: product(handle: "playgirlz-keychain") {
-        ...DropProduct
-      }
-      lollipopKeychain: product(handle: "lollipop-keychain") {
-        ...DropProduct
-      }
     }
   `,
   [DROP_PRODUCT_FRAGMENT],
@@ -96,63 +90,13 @@ const DROP = [
     imagePosition: "center",
   },
   {
-    key: "clubGirl",
-    handle: "club-girl-sticker",
-    name: "Play Girls Club",
+    key: "holographicSticker",
+    handle: "holographic-pgc-sticker",
+    name: "Holographic Sticker",
     price: "$5",
     detail: "One sticker",
     stock: "25 stickers",
     image: "/brand/stickers/club-girl.jpg",
-    imagePosition: "center",
-  },
-  {
-    key: "lollipop",
-    handle: "lollipop-sticker",
-    name: "Lollipop",
-    price: "$5",
-    detail: "One sticker",
-    stock: "25 stickers",
-    image: "/brand/stickers/lollipop.jpg",
-    imagePosition: "center",
-  },
-  {
-    key: "cherries",
-    handle: "cherries-sticker",
-    name: "Cherries",
-    price: "$5",
-    detail: "One sticker",
-    stock: "25 stickers",
-    image: "/brand/stickers/cherries.jpg",
-    imagePosition: "center",
-  },
-  {
-    key: "bunnyGirl",
-    handle: "bunny-girl-sticker",
-    name: "Bunny Girl",
-    price: "$5",
-    detail: "One sticker",
-    stock: "25 stickers",
-    image: "/brand/stickers/bunny-girl.jpg",
-    imagePosition: "center",
-  },
-  {
-    key: "orchids",
-    handle: "orchid-sticker",
-    name: "Orchid",
-    price: "$5",
-    detail: "One sticker",
-    stock: "25 stickers",
-    image: "/brand/stickers/orchids.jpg",
-    imagePosition: "center",
-  },
-  {
-    key: "bunnyHeart",
-    handle: "bunny-heart-sticker",
-    name: "Heart Bunny",
-    price: "$5",
-    detail: "One sticker",
-    stock: "25 stickers",
-    image: "/brand/stickers/bunny-heart.jpg",
     imagePosition: "center",
   },
 ] as const;
@@ -163,7 +107,7 @@ export function meta() {
     {
       name: "description",
       content:
-        "Play Girlz Club is Zena’s product world. A birthday drop of stickers and keychains.",
+        "Play Girlz Club is Zena’s product world. A birthday drop of stickers.",
     },
   ];
 }
@@ -177,7 +121,10 @@ export async function loader({ context }: Route.LoaderArgs) {
   return {
     drop: DROP.map((item) => ({
       ...item,
-      product: item.key === "stickerPack" ? (data?.stickerPack ?? null) : null,
+      product:
+        item.key === "stickerPack"
+          ? (data?.stickerPack ?? null)
+          : (data?.holographicSticker ?? null),
     })),
   };
 }
@@ -194,13 +141,16 @@ export default function Home({ loaderData }: Route.ComponentProps) {
             <br />
             CLUB
           </h1>
+          <p className="pointer-events-none relative z-30 mt-6 max-w-md text-lg leading-snug font-semibold md:max-w-[14rem] md:text-xl">
+            Our new sticker pack is now live, made for all the baddies!
+          </p>
           <a
             href="#drop"
             className="pgc-scroll-cta pgc-shop-now pointer-events-auto relative z-30 mt-8 inline-flex h-12 items-center rounded-full px-6 text-sm font-semibold text-[#1a1016] no-underline"
           >
             Shop Our New Collection
           </a>
-          <HeroCollage products={loaderData.drop} />
+          <HeroCollage />
         </div>
         <ScrollCue />
         <div className="absolute inset-x-0 -bottom-10 z-30 w-full">
@@ -216,7 +166,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         <h2 className="mb-8 text-5xl leading-none font-black tracking-tight uppercase md:text-7xl">
           For the <span className="pgc-girlz text-[#c2186a]">baddies</span>
         </h2>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2">
           {loaderData.drop.map((item) => (
             <DropProductCard key={item.handle} item={item} />
           ))}

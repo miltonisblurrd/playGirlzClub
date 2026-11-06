@@ -119,6 +119,18 @@ body:has(.drawer-left[open]) {
   touch-action: none;
 }
 
+.pgc-sticker {
+  filter: drop-shadow(0 1px 1px rgb(26 16 22 / 0.18)) drop-shadow(0 6px 10px rgb(26 16 22 / 0.16));
+  transition:
+    filter 0.2s ease,
+    transform 0.2s ease;
+}
+
+.pgc-hero-card:active .pgc-sticker {
+  filter: drop-shadow(0 4px 4px rgb(26 16 22 / 0.14)) drop-shadow(0 22px 26px rgb(26 16 22 / 0.24));
+  transform: translateY(-6px) scale(1.04);
+}
+
 @media (max-width: 767px) {
   .pgc-hero-board {
     top: 21rem;
