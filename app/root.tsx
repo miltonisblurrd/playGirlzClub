@@ -15,6 +15,7 @@ import {
 import { CartAnalyticsTracker, PageViewedTracker } from "~/components/AnalyticsTrackers";
 import { CartDrawer } from "~/components/CartDrawer";
 import { Footer } from "~/components/Footer";
+import { Splash } from "~/components/Splash";
 import { Header } from "~/components/Header";
 import { MarqueeBanner } from "~/components/MarqueeBanner";
 import { SearchDrawer } from "~/components/SearchDrawer";
@@ -45,7 +46,7 @@ export const links: Route.LinksFunction = () => [
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap",
   },
-  { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+  { rel: "icon", href: "/favicon.png", type: "image/png" },
 ];
 
 export const middleware: Route.MiddlewareFunction[] = [
@@ -136,6 +137,11 @@ export function Layout({ children }: { children: ReactNode }) {
         ) : null}
         <Meta />
         <Links />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem("pgc-splash")==="1")document.documentElement.classList.add("pgc-splash-seen")}catch(e){}`,
+          }}
+        />
       </head>
       <body className="bg-surface text-on-surface font-body flex min-h-svh flex-col antialiased">
         <a
@@ -144,6 +150,7 @@ export function Layout({ children }: { children: ReactNode }) {
         >
           Skip to content
         </a>
+        <Splash />
         {children}
         <ScrollRestoration />
         <Scripts />

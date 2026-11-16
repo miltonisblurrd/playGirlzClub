@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
 const SHOTS = [
-  { id: "club-girl", src: "/brand/stickers/cut/club-girl.png", alt: "Play Girls Club sticker", x: 28, y: 4, mx: -8, my: 0, w: 300, rotate: -8, position: "center", delay: "0.05s" },
-  { id: "heart-bunny", src: "/brand/stickers/cut/heart-bunny.png", alt: "Heart bunny sticker", x: 58, y: 0, mx: 52, my: -16, w: 270, rotate: 7, position: "center", delay: "0.16s" },
-  { id: "orchid", src: "/brand/stickers/cut/orchid.png", alt: "Orchid sticker", x: 40, y: 26, mx: 24, my: 24, w: 330, rotate: 3, position: "center", delay: "0.28s" },
-  { id: "bunny-girl", src: "/brand/stickers/cut/bunny-girl.png", alt: "Bunny girl sticker", x: 68, y: 32, mx: 54, my: 42, w: 260, rotate: -6, position: "center", delay: "0.4s" },
-  { id: "cherries", src: "/brand/stickers/cut/cherries.png", alt: "Cherries sticker", x: 18, y: 46, mx: -8, my: 46, w: 260, rotate: 8, position: "center", delay: "0.52s" },
-  { id: "lollipop", src: "/brand/stickers/cut/lollipop.png", alt: "Lollipop sticker", x: 52, y: 54, mx: 48, my: 64, w: 230, rotate: -4, position: "center", delay: "0.64s" },
+  { id: "club-girl", src: "/brand/stickers/cut/club-girl.png", alt: "Play Girls Club sticker", x: 28, y: 4, mx: -8, my: 0, w: 330, rotate: -8, position: "center", delay: "0.05s" },
+  { id: "heart-bunny", src: "/brand/stickers/cut/heart-bunny.png", alt: "Heart bunny sticker", x: 70, y: 0, mx: 52, my: -16, w: 300, rotate: 7, position: "center", delay: "0.16s" },
+  { id: "orchid", src: "/brand/stickers/cut/orchid.png", alt: "Orchid sticker", x: 40, y: 26, mx: 24, my: 24, w: 360, rotate: 3, position: "center", delay: "0.28s" },
+  { id: "bunny-girl", src: "/brand/stickers/cut/bunny-girl.png", alt: "Bunny girl sticker", x: 80, y: 32, mx: 54, my: 42, w: 290, rotate: -6, position: "center", delay: "0.4s" },
+  { id: "cherries", src: "/brand/stickers/cut/cherries.png", alt: "Cherries sticker", x: 18, y: 46, mx: -8, my: 46, w: 290, rotate: 8, position: "center", delay: "0.52s" },
+  { id: "lollipop", src: "/brand/stickers/cut/lollipop.png", alt: "Lollipop sticker", x: 64, y: 54, mx: 48, my: 64, w: 255, rotate: -4, position: "center", delay: "0.64s" },
 ];
 
 type Shot = (typeof SHOTS)[number] & { z: number };

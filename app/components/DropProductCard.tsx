@@ -6,7 +6,6 @@ export type DropItem = {
   name: string;
   price: string;
   detail: string;
-  stock: string;
   image: string;
   imagePosition: string;
   product: DropProduct | null;
@@ -45,10 +44,9 @@ export function DropProductCard({ item }: { item: DropItem }) {
         <Thumb item={item} />
         <Details item={item} />
         <p className="mt-1 text-lg text-[#4a3040]">{item.detail}</p>
-        <p className="mt-1 text-base tracking-wide text-[#c2186a] uppercase">{item.stock}</p>
         <button
           type="button"
-          className="pgc-scroll-cta pgc-shop-now mt-5 inline-flex h-14 items-center rounded-full px-8 text-lg font-semibold text-[#1a1016]"
+          className="pgc-scroll-cta pgc-shop-now mt-5 inline-flex h-14 cursor-pointer items-center rounded-full px-8 text-lg font-semibold text-[#1a1016]"
           disabled
         >
           Buy now
@@ -68,8 +66,6 @@ function WiredCard({ item }: { item: DropItem }) {
   const { register, formProps, errors, pending, options } = useProductForm();
   const variant = item.product?.selectedOrFirstAvailableVariant;
   const soldOut = variant ? !variant.availableForSale : true;
-  const left =
-    variant?.quantityAvailable != null ? `${variant.quantityAvailable} left` : item.stock;
 
   return (
     <article className="pgc-card">
@@ -78,11 +74,10 @@ function WiredCard({ item }: { item: DropItem }) {
       <p className="mt-1 text-lg text-[#4a3040]">{item.detail}</p>
       <form {...formProps({ afterSubmit: openCartDrawer })} className="mt-1">
         <input type="hidden" {...register("merchandiseId", {})} />
-        <p className="text-base tracking-wide text-[#c2186a] uppercase">{left}</p>
         <button
           {...register("addToCart", {})}
           disabled={soldOut || pending || !options}
-          className="pgc-scroll-cta pgc-shop-now mt-5 inline-flex h-14 items-center rounded-full px-8 text-lg font-semibold text-[#1a1016] disabled:opacity-50"
+          className="pgc-scroll-cta pgc-shop-now mt-5 inline-flex h-14 cursor-pointer items-center rounded-full px-8 text-lg font-semibold text-[#1a1016] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {soldOut ? "Sold out" : "Buy now"}
         </button>

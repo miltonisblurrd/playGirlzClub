@@ -1,12 +1,22 @@
+import { type MouseEvent } from "react";
 import { DISCORD_URL, INSTAGRAM_URL } from "~/lib/brand";
 
 const LINKS = [
   { label: "Shop", href: "/#drop" },
   { label: "About", href: "/#about" },
-  { label: "Privacy Policy", href: "/#privacy" },
+  { label: "Privacy Policy", href: "/privacy" },
 ];
 
 const linkClass = "pgc-footer-link text-4xl leading-none font-black no-underline md:text-5xl";
+
+function scrollToSection(event: MouseEvent<HTMLAnchorElement>, href: string) {
+  const id = href.split("#")[1];
+  const target = id ? document.getElementById(id) : null;
+  if (!target) return;
+  event.preventDefault();
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+  window.history.pushState(null, "", `/#${id}`);
+}
 
 export function Footer() {
   return (
@@ -16,25 +26,28 @@ export function Footer() {
         alt=""
         className="absolute inset-0 h-full w-full object-cover object-[78%_center]"
       />
+      <div className="absolute inset-0 bg-black/25" aria-hidden="true" />
       <nav
         aria-label="Footer"
         className="relative flex min-h-[70vh] flex-col justify-end gap-2 px-6 py-10 md:px-10 md:py-12"
       >
         {LINKS.map((link) => (
-          <a key={link.href} href={link.href} className={linkClass}>
+          <a key={link.href} href={link.href} className={linkClass} onClick={(event) => scrollToSection(event, link.href)}>
             {link.label}
           </a>
         ))}
         <div className="flex items-center justify-between gap-6">
-          <a href="/#shipping" className={linkClass}>
+          <a href="/shipping" className={linkClass}>
             Shipping and Refunds
           </a>
           <div className="flex items-center gap-4">
             <a href={INSTAGRAM_URL} aria-label="Instagram" className="inline-flex text-white">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.8" />
-                <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />
-                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  fillRule="evenodd"
+                  d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm4.5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm5.25-2.15a1.15 1.15 0 1 0 0 2.3 1.15 1.15 0 0 0 0-2.3Z"
+                  clipRule="evenodd"
+                />
               </svg>
             </a>
             <a href={DISCORD_URL} aria-label="Discord" className="inline-flex text-white">

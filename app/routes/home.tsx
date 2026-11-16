@@ -59,6 +59,10 @@ const DROP_PRODUCT_FRAGMENT = gql(
     adjacentVariants(selectedOptions: $selectedOptions) {
       ...DropVariant
     }
+    featuredImage {
+      url
+      altText
+    }
   }
 `,
   [DROP_VARIANT_FRAGMENT],
@@ -70,7 +74,7 @@ const DROP_QUERY = gql(
       stickerPack: product(handle: "sticker-pack") {
         ...DropProduct
       }
-      holographicSticker: product(handle: "holographic-pgc-sticker") {
+      holographicSticker: product(handle: "holographic-sticker") {
         ...DropProduct
       }
     }
@@ -85,17 +89,15 @@ const DROP = [
     name: "Sticker Pack",
     price: "$12",
     detail: "Pack of six",
-    stock: "25 packs",
     image: "/brand/stickers/sticker-pack.jpg",
     imagePosition: "center",
   },
   {
     key: "holographicSticker",
-    handle: "holographic-pgc-sticker",
+    handle: "holographic-sticker",
     name: "Holographic Sticker",
     price: "$5",
     detail: "One sticker",
-    stock: "25 stickers",
     image: "/brand/stickers/club-girl.jpg",
     imagePosition: "center",
   },
@@ -119,13 +121,17 @@ export async function loader({ context }: Route.LoaderArgs) {
   });
 
   return {
-    drop: DROP.map((item) => ({
-      ...item,
-      product:
+    drop: DROP.map((item) => {
+      const product =
         item.key === "stickerPack"
           ? (data?.stickerPack ?? null)
-          : (data?.holographicSticker ?? null),
-    })),
+          : (data?.holographicSticker ?? null);
+      return {
+        ...item,
+        image: product?.featuredImage?.url ?? item.image,
+        product,
+      };
+    }),
   };
 }
 
@@ -178,7 +184,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         <img
           src="/brand/xena.jpg"
           alt="Xena"
-          className="aspect-square w-full rounded-[2rem] border-2 border-[#f3aacb] object-cover"
+          className="aspect-square w-full rounded-[2rem] border-2 border-[#f3aacb] object-cover object-[center_42%]"
         />
         <div>
           <p className="text-sm font-semibold tracking-[0.22em] text-[#c2186a] uppercase">Founder</p>
